@@ -1,4 +1,4 @@
-Method overriding in Java is a mechanism that allows a subclass to provide a specific implementation of a method that is already defined in its superclass. This is done to provide a specialized behavior for that method in the subclass. Here's an illustration of method overriding in Java:
+/*Method overriding in Java is a mechanism that allows a subclass to provide a specific implementation of a method that is already defined in its superclass. This is done to provide a specialized behavior for that method in the subclass. Here's an illustration of method overriding in Java:*/
 
 class Animal {
     void makeSound() {
@@ -31,8 +31,8 @@ public class Main {
         cat.makeSound();            // Output: Cat meows
     }
 }
-```
 
+/*
 In this example:
 
 1. We have a base class `Animal` with a method `makeSound()`.
@@ -42,3 +42,4 @@ In this example:
 3. In the `main` method, we create instances of `Animal`, `Dog`, and `Cat`. When we call the `makeSound()` method on each of these objects, the overridden method in the respective subclass is invoked, providing specialized behavior.
 
 This demonstrates how method overriding allows you to provide different implementations of the same method in different subclasses, achieving polymorphism and runtime binding in Java.
+*/
