@@ -1,0 +1,190 @@
+Here are examples of code snippets for each of the topics you mentioned:
+
+
+---
+
+1. Servlet
+
+A servlet to handle HTTP GET requests and send a simple response.
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/HelloServlet")
+public class HelloServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        response.getWriter().println("<h1>Hello, Servlet!</h1>");
+    }
+}
+
+
+---
+
+2. Session Management (Servlet)
+
+Using HttpSession to store and retrieve user-specific data.
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/SessionExample")
+public class SessionExample extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.setAttribute("username", "JohnDoe");
+
+        response.setContentType("text/html");
+        response.getWriter().println("<p>Session set for user: JohnDoe</p>");
+    }
+}
+
+
+---
+
+3. Enterprise Java Beans (EJB)
+
+A simple stateless session bean.
+
+EJB Interface
+
+import javax.ejb.Remote;
+
+@Remote
+public interface HelloBeanRemote {
+    String sayHello(String name);
+}
+
+EJB Implementation
+
+import javax.ejb.Stateless;
+
+@Stateless
+public class HelloBean implements HelloBeanRemote {
+    public String sayHello(String name) {
+        return "Hello, " + name;
+    }
+}
+
+Client
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+public class EJBClient {
+    public static void main(String[] args) throws Exception {
+        Context context = new InitialContext();
+        HelloBeanRemote helloBean = (HelloBeanRemote) context.lookup("java:global/MyApp/HelloBean");
+        System.out.println(helloBean.sayHello("John"));
+    }
+}
+
+
+---
+
+4. JSP
+
+A JSP file to display a message dynamically.
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSP Example</title>
+</head>
+<body>
+    <h1>Hello, JSP!</h1>
+    <p>Current time: <%= new java.util.Date() %></p>
+</body>
+</html>
+
+
+---
+
+5. Session Bean Management
+
+A stateful session bean storing user data.
+
+Stateful Session Bean
+
+import javax.ejb.Stateful;
+
+@Stateful
+public class UserSessionBean {
+    private String username;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+}
+
+Client
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+public class SessionBeanClient {
+    public static void main(String[] args) throws Exception {
+        Context context = new InitialContext();
+        UserSessionBean userBean = (UserSessionBean) context.lookup("java:global/MyApp/UserSessionBean");
+        userBean.setUsername("JohnDoe");
+        System.out.println("Username: " + userBean.getUsername());
+    }
+}
+
+
+---
+
+6. Cookies
+
+Servlet setting and reading a cookie.
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CookieExample")
+public class CookieExample extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        // Setting a cookie
+        Cookie userCookie = new Cookie("username", "JohnDoe");
+        userCookie.setMaxAge(60 * 60); // 1 hour
+        response.addCookie(userCookie);
+
+        // Reading cookies
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("username")) {
+                    response.getWriter().println("Cookie value: " + cookie.getValue());
+                }
+            }
+        }
+    }
+}
+
+
+---
+
+Let me know if you'd like any topic elaborated further!
+
